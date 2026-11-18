@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AI Health Checker</title>
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(135deg, #76b852, #8DC26F);
+      color: white;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      margin: 0;
+    }
+
+    h1 {
+      margin-bottom: 20px;
+      font-size: 2em;
+      text-align: center;
+    }
+
+    .container {
+      background-color: rgba(255, 255, 255, 0.1);
+      border-radius: 20px;
+      padding: 30px;
+      width: 90%;
+      max-width: 400px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    }
+
+    label {
+      display: block;
+      margin-top: 15px;
+      font-weight: bold;
+    }
+
+    select {
+      width: 100%;
+      padding: 8px;
+      border-radius: 8px;
+      border: none;
+      outline: none;
+      margin-top: 5px;
+    }
+
+    button {
+      margin-top: 25px;
+      width: 100%;
+      background-color: #4CAF50;
+      color: white;
+      padding: 10px;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      font-size: 1em;
+      transition: 0.3s;
+    }
+
+    button:hover {
+      background-color: #45a049;
+    }
+
+    .result {
+      margin-top: 20px;
+      font-size: 1.2em;
+      text-align: center;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <h1>🧠 AI Health Checker</h1>
+  <div class="container">
+    <label for="fever">Do you have fever?</label>
+    <select id="fever">
+      <option value="no">No</option>
+      <option value="yes">Yes</option>
+    </select>
+
+    <label for="cough">Do you have cough?</label>
+    <select id="cough">
+      <option value="no">No</option>
+      <option value="yes">Yes</option>
+    </select>
+
+    <label for="tired">Do you feel tired?</label>
+    <select id="tired">
+      <option value="no">No</option>
+      <option value="yes">Yes</option>
+    </select>
+
+    <label for="headache">Do you have headache?</label>
+    <select id="headache">
+      <option value="no">No</option>
+      <option value="yes">Yes</option>
+    </select>
+
+    <button onclick="checkHealth()">Check My Health</button>
+
+    <div class="result" id="result"></div>
+  </div>
+
+  <script>
+    function checkHealth() {
+      const fever = document.getElementById("fever").value;
+      const cough = document.getElementById("cough").value;
+      const tired = document.getElementById("tired").value;
+      const headache = document.getElementById("headache").value;
+      const resultDiv = document.getElementById("result");
+
+      let score = 0;
+      if (fever === "yes") score++;
+      if (cough === "yes") score++;
+      if (tired === "yes") score++;
+      if (headache === "yes") score++;
+
+      // Simple AI logic
+      let resultText = "";
+      if (score === 0) {
+        resultText = "🎉 You seem completely healthy!";
+      } else if (score === 1) {
+        resultText = "🙂 You might have a mild issue, take rest!";
+      } else if (score === 2) {
+        resultText = "🤒 You may be having a common cold or mild fever.";
+      } else if (score >= 3) {
+        resultText = "⚠ You might be sick — better visit a doctor!";
+      }
+
+      resultDiv.innerHTML = resultText;
+    }
+  </script>
+</body>
+</html>
